@@ -1,0 +1,37 @@
+# XBMC Media Center language file
+# Addon Name: script.xbmc.callbacks2
+# Addon id: script.xbmc.callbacks2
+# Addon Provider: KenV99
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Addons\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#Add-on messages id=32001 to 32005
+
+msgctxt "#32001"
+msgid "General"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Section id for transforms"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Append date/time to json backup file?"
+msgstr ""
+
+msgctxt "#32004"
+msgid "Restart hyperiond after saving?"
+msgstr ""
+
+msgctxt "#32005"
+msgid "hyperion config json path/filename"
+msgstr ""
+
