@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.hyperion_conf_update" name="hyperion_conf_update" version="0.1.0" provider-name="KenV99">
+  <requires>
+    <import addon="xbmc.python" version="2.14.0"/>
+    <import addon="xbmc.addon" version="12.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py"/>
+    <provides>executable</provides>
+
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en"></summary>
+    <description lang="en">Update hyperion.config.json with current settings
+    </description>
+    <disclaimer lang="en">For bugs, requests or general questions visit the XBMC forums.</disclaimer>
+    <platform>all</platform>
+    <source></source>
+    <website></website>
+    <forum></forum>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+	<language></language>
+	<email></email>
+  </extension>
+</addon>
