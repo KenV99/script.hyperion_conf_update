@@ -17,28 +17,34 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import xbmc
-import xbmcgui
-import xbmcaddon
 import os
 import datetime
 import json
 import subprocess
-
-_settings = xbmcaddon.Addon("script.hyperion_conf_update")
-date_append = _settings.getSetting('date_append') == 'true'
-transform_id = _settings.getSetting('tid')
-restart = _settings.getSetting('restart') == 'true'
+import re
+pattern = re.compile('[\W_]+')
 
 debug = False
 if debug:
-    filepath = xbmc.translatePath('special://home/addons/script.hyperion_conf_update')
+    filepath = r'C:\Users\Ken User\AppData\Roaming\Kodi\addons\script.hyperion_conf_update'
+    date_append = True
+    restart = True
+    class xbmc:
+        @staticmethod
+        def log(p):
+            print p
 else:
+    import xbmc
+    import xbmcgui
+    import xbmcaddon
     filepath = r'/storage/.config'
+    _settings = xbmcaddon.Addon("script.hyperion_conf_update")
+    date_append = _settings.getSetting('date_append') == 'true'
+    restart = _settings.getSetting('restart') == 'true'
 
 def get_current():
     if debug:
-        with open(os.path.join(filepath,'output.txt'), 'r') as l:
+        with open(os.path.join(filepath,'output.json'), 'r') as l:
             filetxt = ''.join(l.readlines()[3:])
     else:
         try:
@@ -56,12 +62,14 @@ def get_current():
         xbmc.log('#### hyperion_config_update ERROR: %s' % e.message)
         filetxt = ''
         raise
-    tl =  jd['transform']
-    tl_cnt = len(tl)
-    for i in xrange(0, tl_cnt-1):
-        if tl[i]['id'] == transform_id:
-            t = tl[i]
-    return t
+    else:
+        td = {}
+        t = {}
+        tl =  jd['transform']
+        tl_cnt = len(tl)
+        for i in xrange(0, tl_cnt):
+            td[tl[i]['id']] = tl[i]
+        return td
 
 def writejson(newjson):
     n = ''.join(newjson)
@@ -86,9 +94,9 @@ def writejson(newjson):
         xbmc.log('#### hyperion_config_update ERROR: %s' % e.message)
         raise
     else:
-        dialog = xbmcgui.Dialog()
-        dialog.notification('hyperion_conf_update', 'json file updated successfully', time=2000)
         if not debug:
+            dialog = xbmcgui.Dialog()
+            dialog.notification('hyperion_conf_update', 'json file updated successfully', time=2000)
             try:
                 op = subprocess.check_output(['killall hyperiond'], shell=True)
             except subprocess.CalledProcessError as e:
@@ -104,7 +112,7 @@ def writejson(newjson):
 
 
 def main():
-    t = get_current()
+    td = get_current()
     try:
         newjson = []
         l = open(os.path.join(filepath, 'hyperion.config.json'), 'r')
@@ -124,8 +132,10 @@ def main():
                     y = line.strip().split(':')
                     if y[0].strip() == '"id"':
                         newjson.append(line)
-                        z = ''.join(['"', transform_id, '",'])
-                        if y[1].strip() == z:
+                        z = y[1].strip()
+                        k = pattern.sub('', z)
+                        if k in td.keys():
+                            t = td[k]
                             idflag = True
                         else:
                             idflag = False

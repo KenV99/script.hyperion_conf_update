@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <settings>
   <category label="32001">
-    <setting default="default" label="32002" id="tid" type="text" />
     <setting default="true" label="32003" id="date_append" type="bool" />
     <setting default="true" label="32004" id="restart" type="bool" />
   </category>

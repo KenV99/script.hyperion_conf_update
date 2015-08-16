@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+This would be placed in /storage/.kodi/userdata/keymaps/
+-->
+<keymap>
+  <global>
+    <keyboard>
+		<a mod="alt,ctrl"> XBMC.RunScript (/storage/.kodi/addons/script.hyperion_conf_update/hyperion_switch.py, ON) </a>
+		<b mod="alt,ctrl"> XBMC.RunScript (/storage/.kodi/addons/script.hyperion_conf_update/hyperion_switch.py, OFF) </b>
+		<three mod="alt,ctrl"> XBMC.RunScript (/storage/.kodi/addons/script.hyperion_conf_update/default.py) </three>
+    </keyboard>
+  </global>
+</keymap>  
